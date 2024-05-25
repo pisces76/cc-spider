@@ -73,7 +73,7 @@ def handle_article(url, date, article_response):
     #print(article_soup)
 
     # 提取文章内容，这里需要根据实际页面结构来调整
-    sections = article_soup.find('div', class_='s_Sec') # <div class="s_Sec">
+    sections = article_soup.find(lambda tag: tag.name == 'div' and tag.get('class') == ['s_Sec']) # 精确匹配 <div class="s_Sec">
     if sections is None:
         log_message(f'ERROR: when reading article {url}')
         return
