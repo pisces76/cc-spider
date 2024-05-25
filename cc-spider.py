@@ -7,10 +7,10 @@ import os,time
 
 #初始化变量
 DEBUG = True
-USER = '葡萄'                               #配置用户名
+USER = '光头佬'                               #配置用户名
 SLEEP_TIME = 5                              #抓取每篇文章的时间间隔，单位秒
-start_page = 874                            #起始页面
-end_page = 1007                             #终止页面
+start_page = 1                            #起始页面
+end_page = 2                             #终止页面
 FILE_NAME = f'./西西河-{USER}-专辑.docx'     
 LOG_FILE = f'./cc-spider.log'
 FIXED_URL = 'https://talkcc.org/'
@@ -59,7 +59,7 @@ def get_article_links(page_rsp):
     all_links = soup.find_all('a', href=True)  # format: <a href="/article/4487276">xxxx</a>
     all_dates = soup.find_all('small')  #format: <small>2020-03-08 12:43:34</small>
 
-    pos = [i for i, s in enumerate(all_links) if '末页' in s] #filt links between '末页'
+    pos = [i for i, s in enumerate(all_links) if '上页' in s] #filt links between '上页'
     if (len(pos) >= 2):
         filt_links = all_links[pos[0]+1:pos[1]]
     else:
