@@ -7,14 +7,14 @@ import os,time
 
 #初始化变量
 DEBUG = True
-USER = '光头佬'                               #配置用户名
+USER = '葡萄'                               #配置用户名
 SLEEP_TIME = 5                              #抓取每篇文章的时间间隔，单位秒
-start_page = 1                            #起始页面
-end_page = 2                             #终止页面
-FILE_NAME = f'./西西河-{USER}-专辑.docx'     
-LOG_FILE = f'./cc-spider.log'
-FIXED_URL = 'https://talkcc.org/'
-
+start_page = 874                            #起始页面
+end_page   = 1007                           #结束页面
+FIXED_URL  = 'https://talkcc.org/'          #固定URL
+FILE_NAME  = f'./西西河-{USER}-专辑.docx'    #生成word文档名 
+LOG_FILE   = f'./cc-spider.log'             #生成日志文件名
+         
 
 # 初始化Word文档
 if os.path.exists(FILE_NAME):
@@ -51,21 +51,17 @@ def http_req(base_url):
         'cc': requests.utils.unquote(cc_value)
     }
     # 发送请求并解析网页以获取文章链接
-    response = requests.get(base_url, headers=headers, cookies=cookies)
+    response = requests.get(base_url, headers=headers, cookies=cookies) 
     return response
 
 def get_article_links(page_rsp):
     soup = BeautifulSoup(page_rsp.text, 'html.parser')
-    all_links = soup.find_all('a', href=True)  # format: <a href="/article/4487276">xxxx</a>
-    all_dates = soup.find_all('small')  #format: <small>2020-03-08 12:43:34</small>
+    div_tree = soup.find('div', class_='s_Tree')    #format <div class="s_Tree">
 
-    pos = [i for i, s in enumerate(all_links) if '上页' in s] #filt links between '上页'
-    if (len(pos) >= 2):
-        filt_links = all_links[pos[0]+1:pos[1]]
-    else:
-        filt_links = all_links[pos[0]+1:]
+    all_links = div_tree.find_all('a', href=True)  # format: <a href="/article/4487276">xxxx</a>
+    all_dates = div_tree.find_all('small')  #format: <small>2020-03-08 12:43:34</small>
 
-    articles_links = [s for s in filt_links if 'article' in str(s)]
+    articles_links = [s for s in all_links if 'article' in str(s)]
     return all_dates[::-1], articles_links[::-1]     #reverse the list for correct order
 
 def handle_article(url, date, article_response):
@@ -82,7 +78,7 @@ def handle_article(url, date, article_response):
 
     # 将文章标题和内容添加到Word文档
     valid_idx = 1;
-    doc.add_heading(title[valid_idx], level=3)
+    doc.add_heading(title[valid_idx].get_text(), level=3)
     doc.add_paragraph(f'原文：{url}')
     doc.add_paragraph(date)
     for p_tag in p_tags:
@@ -101,7 +97,8 @@ def handle_article(url, date, article_response):
             else:
                 doc.add_picture(img_path, width=Inches(5.5))
         else:
-            log_message(f"ERROR: Cannot handle {p_tag}")
+            doc.add_paragraph(p_tag.get_text())
+            log_message(f"INFO: handle special p_tag = {p_tag}")
                        
     # 可以选择添加一些分隔符或格式化
     doc.add_paragraph('')
