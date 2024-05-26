@@ -27,7 +27,8 @@ pip install beautifulsoup4 requests python-docx
 ```
 
 - 网络环境  
-请确保你有稳定的网络可以正常访问西西河论坛。实际上西河有多个网址可以访问，本项目中使用的是：https://talkcc.org/。如果你的环境无法访问该网址，可以尝试如下其它网址，并将可用网址更新到参数表的[FIXED_URL] 中（详见下节）。  
+请确保你有稳定的网络可以正常访问西西河论坛。实际上西河有多个网址可以访问，本项目中使用的是：https://talkcc.org/。  
+如果你的环境无法访问该网址，可以尝试如下其它网址，并将可用网址更新到参数表的[FIXED_URL] 中（详见下节）。  
 https://www.talkcc.com   
 https://www.talkcc.net  
 https://www.talkcc.org  
