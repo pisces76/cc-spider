@@ -4,7 +4,7 @@
 ## 关于西西河
 西西河是一个知名的海外华人社区论坛，名称应该来源于网站域名cchere.com。西西河成立于2003年，最初是一个海外华人和留学生的聚集地，讨论的话题涵盖了政治、经济、历史、文化等多个领域。西西河的用户群体包括了许多专业人士和学者，因此论坛上的讨论具有较高的学术性和专业性，并以其高质量的内容和深入的讨论而闻名。(以上由GPT生成)
 
-西西河论坛上著名的大佬包括wxmang、万里风中虎、葡萄、陈经、马伯庸、忘情......（排名不分先后）。尽管有些大名已渐渐隐匿江湖，但仍有很多ID至今活跃在互联网上。
+西西河论坛上著名的大佬包括wxmang、万里风中虎、葡萄、陈经、马伯庸、史文恭、忘情......（排名不分先后）。尽管有些大名已渐渐隐匿江湖，但仍有很多ID至今活跃在互联网上。
 
 ## 关于cc-spider
 为了收集河内大佬留下的诸多优秀文字，设计了cc-spider这个工具。特点：
@@ -50,7 +50,7 @@ USER = '葡萄'                               #配置用户名
 SLEEP_TIME = 5                              #抓取每篇文章的时间间隔，单位秒
 start_page = 874                            #起始页面，通常可从1开始
 end_page   = 1007                           #终止页面，如上图红框2中数字所示
-FIXED_URL  = 'https://talkcc.org/'          #固定URL
+FIXED_URL  = 'https://talkcc.org/'          #固定URL，可以换成其它可访问的西河网址
 ```
 
 - 运行
@@ -93,6 +93,8 @@ nohup python cc-spider.py &
 <img width="160" src="https://raw.githubusercontent.com/pisces76/pisces76/master/wechat-QR.jpg">
 
 ### 支付宝
-<img width="160" src="https://raw.githubusercontent.com/pisces76/pisces76/master/alipay-QR.jpg">
-
+<img width="160" src="https://raw.githubusercontent.com/pisces76/pisces76/master/alipay-QR.jpg">  
+  
+### Ko-Fi  
+<a href='https://ko-fi.com/K3K8YPLKT' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
