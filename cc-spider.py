@@ -133,6 +133,10 @@ def main():
     HOME_PATH = f'{FIXED_URL}user/{USER}/所有帖/'
     log_message('-----------------------------------------------------------------------------------')
     log_message(f'Ready to collect {USER}\'s articles from {HOME_PATH}, page {start_page}~{end_page}')
+    
+    start_time = time.time()    #record the start time
+    total_articles = 0          #Initialize a couter for total articles
+
     for page in range(start_page, end_page+1): 
         log_message(f'Start to process Page-{page}')
         
@@ -152,14 +156,24 @@ def main():
                 log_message(f'    Start to process {article_url}')
                 url = f'{FIXED_URL}{article_url}'
                 print_article(dates[i], url)
+                total_articles += 1
                 time.sleep(SLEEP_TIME)
         
         doc.save(FILE_NAME)  #save for every page
 
     #Finally save the file
     doc.save(FILE_NAME)
-    log_message('Done!\n')
+    
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    hours =  int(elapsed_time // 3600)
+    minutes = int((elapsed_time % 3600) // 60)
+    seconds = int(elapsed_time % 60)
 
+    log_message(f'Done! Total articles downloaded: {total_articles}')
+    log_message(f'Elapsed time: {hours:02d}:{minutes:02d}:{seconds:02d}s')
+    
+    
 if __name__ == "__main__":
     if 1:
         main()
